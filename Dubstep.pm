@@ -15,33 +15,33 @@ sub new {
     $this->{results} = [];
     $this->{p_count} = 0;
     $this->{p_done} = 0;
-	$this->{steps} = [];
-	$this->{in_call} = 0;
+    $this->{steps} = [];
+    $this->{in_call} = 0;
 
-	# factory for callbacks
+    # factory for callbacks
     sub step {
-	  return sub {
+      return sub {
         my ($err, @res) = @_;
         my $f = shift(@{$this->{steps}});
         $this->{in_call} = 1;
-		\$f->($err, @res);
-	    $this->{in_call} = 0;
-		$this->check();
+        \$f->($err, @res);
+        $this->{in_call} = 0;
+        $this->check();
       };
     };
 
     sub check  {
       my ($this, $in) = @_;
       return unless ($this->{in_call} == 0);
-	  return unless ($this->{p_count} > 0); 
+      return unless ($this->{p_count} > 0); 
       $this->{p_done} += 1;
-	  return unless ($this->{p_done} == $this->{p_count});
+      return unless ($this->{p_done} == $this->{p_count});
       my $res_array = $this->{results};
       $this->{results} = [];
       $this->{p_count} = 0;
       $this->{p_done} = 0;
-	  my $cb = $this->step();
-	  $cb->(undef, @$res_array);
+      my $cb = $this->step();
+      $cb->(undef, @$res_array);
     }
         
     sub parallel {
@@ -70,7 +70,7 @@ sub Step {
 }
 
 sub step {
-	print "dummy step.\n";
+  print "dummy step.\n";
 }
 
 
