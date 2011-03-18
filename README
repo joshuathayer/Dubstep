@@ -41,21 +41,21 @@ $dubstep->Step(
   },
   sub {
     my ($err, $result) = @_; 
-	die($err) if $err;
+    die($err) if $err;
     do_something_else($result, $dubstep->step);
   },
   sub {
     my ($err, $result) = @_; 
     die($err) if $err;
-    do_this("hello there, do_this", $dubstep->parallel());
-    and_do_this("hello there, and_do_this", $dubstep->parallel());
+    do_this("hello there, do_this", $dubstep->parallel);
+    and_do_this("hello there, and_do_this", $dubstep->parallel);
   }, 
   sub {
     my ($err, $result) = @_; 
     die($err) if $err;
-    do_this("hello again, do_this", $dubstep->parallel());
-    and_do_this("hello again, and_do_this", $dubstep->parallel());
-    do_this_third_thing("hello there, and_do_this", $dubstep->parallel());
+    do_this("hello again, do_this", $dubstep->parallel);
+    and_do_this("hello again, and_do_this", $dubstep->parallel);
+    do_this_third_thing("hello there, and_do_this", $dubstep->parallel);
   }, 
   sub {
     my ($err, $res0, $res1) = @_;

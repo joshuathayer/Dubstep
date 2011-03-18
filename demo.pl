@@ -23,7 +23,7 @@ sub do_this {
 sub and_do_this {
   my ($in, $next) = @_;
   print "in and_do_this(), input was $in\n";
-  next->(undef, "from and_do_this (parallel 1)");
+  $next->(undef, "from and_do_this (parallel 1)");
 }
 
 sub do_this_third_thing {
@@ -46,15 +46,15 @@ $dubstep->Step(
   sub {
     my ($err, $result) = @_; 
     die($err) if $err;
-    do_this("hello there, do_this", $dubstep->parallel());
-    and_do_this("hello there, and_do_this", $dubstep->parallel());
+    do_this("hello there, do_this", $dubstep->parallel);
+    and_do_this("hello there, and_do_this", $dubstep->parallel);
   }, 
   sub {
     my ($err, $result) = @_; 
     die($err) if $err;
-    do_this("hello again, do_this", $dubstep->parallel());
-    and_do_this("hello again, and_do_this", $dubstep->parallel());
-    do_this_third_thing("hello there, and_do_this", $dubstep->parallel());
+    do_this("hello again, do_this", $dubstep->parallel);
+    and_do_this("hello again, and_do_this", $dubstep->parallel);
+    do_this_third_thing("hello there, and_do_this", $dubstep->parallel);
   }, 
   sub {
     my ($err, $res0, $res1) = @_;
